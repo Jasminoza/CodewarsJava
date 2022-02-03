@@ -13,7 +13,6 @@ public class ReversedSequence {
         for (int x = 0; x < n; x++) {
             arr[x] = n - x;
         }
-        //System.out.println());
-        return System.out.println(Arrays.toString(arr));
+        return arr;
     }
 }
