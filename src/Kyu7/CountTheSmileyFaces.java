@@ -46,12 +46,9 @@ public class CountTheSmileyFaces {
             return 0;
         }
         for (int x = 0; x < arrLength; x++) {
-            arr.set(x, arr.get(x).replaceFirst(":", "A"));
-            arr.set(x, arr.get(x).replaceFirst(";", "A"));
-            arr.set(x, arr.get(x).replaceFirst("-", "B"));
-            arr.set(x, arr.get(x).replaceFirst("~", "B"));
-            arr.set(x, arr.get(x).replaceFirst("[)]", "C"));
-            arr.set(x, arr.get(x).replaceFirst("D", "C"));
+            arr.set(x, arr.get(x).replaceFirst("[;:]", "A"));
+            arr.set(x, arr.get(x).replaceFirst("[-~]", "B"));
+            arr.set(x, arr.get(x).replaceFirst("[)D]", "C"));
 
             if (arr.get(x).equals("ABC") || arr.get(x).equals("AC")) {
                 count++;
