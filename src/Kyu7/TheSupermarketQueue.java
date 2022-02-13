@@ -10,15 +10,15 @@ import java.util.Arrays;
  * customers: an array of positive integers representing the queue. Each integer represents
  * a customer, and its value is the amount of time they require to check out.
  * n: a positive integer, the number of checkout tills.
- *
+ * <p>
  * output
  * The function should return an integer, the total time required.
- *
+ * <p>
  * Clarifications
  * There is only ONE queue serving many tills, and
  * The order of the queue NEVER changes, and
  * The front person in the queue (i.e. the first element in the array/list) proceeds to a till as soon as it becomes free.
- *
+ * <p>
  * N.B. You should assume that all the test input will be valid, as specified above.
  */
 
@@ -36,7 +36,7 @@ public class TheSupermarketQueue {
 //        n = 2;
 //        int[] customers4 = {1, 3, 3, 4, 2, 1, 7, 2, 3, 4};
 //        System.out.println(solveSuperMarketQueue(customers4, n));// should be 16.
-        int[] customers5 = {2,6,3,4,2,5,2,4,2,5,7,7};
+        int[] customers5 = {2, 6, 3, 4, 2, 5, 2, 4, 2, 5, 7, 7};
         n = 5;
         System.out.println(solveSuperMarketQueue(customers5, n));// should be 10.
     }
@@ -79,9 +79,8 @@ public class TheSupermarketQueue {
             if (minSumm > summ) {
                 minSumm = summ;
                 minTill = y;
-                summ = 0;
             }
-
+            summ = 0;
         }
         return minTill;
     }
