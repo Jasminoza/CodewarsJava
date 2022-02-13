@@ -16,7 +16,8 @@ public class BasicOperations {
                 return v1 - v2;
             case "*":
                 return v1 * v2;
+            default:
+                return v1 / v2;
         }
-         return v1 / v2;
     }
 }
