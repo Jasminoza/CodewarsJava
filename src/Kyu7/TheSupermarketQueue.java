@@ -39,61 +39,94 @@ public class TheSupermarketQueue {
         int[] customers5 = {2, 6, 3, 4, 2, 5, 2, 4, 2, 5, 7, 7};
         n = 5;
         System.out.println(solveSuperMarketQueue(customers5, n));// should be 10.
+        System.out.println(getMaxTillTime(n, customers5));
     }
 
-    public static int solveSuperMarketQueue(int[] customers, int n) {
+    public static int solveSuperMarketQueue(int[] customers, int numberOfTills) {
 
         if (customers.length == 0) {
             return 0;
         }
 
-        if (n == 1) {
+        if (numberOfTills == 1) {
             return Arrays.stream(customers).sum();
         }
 
-        int x = 0;
-        int y = 0;
-        int minTill = 0;
-        int[][] seller = new int[n][customers.length];
-        seller[0][0] = customers[0];
+        int[][] tills = createTills(customers,numberOfTills);
 
-        for (y = 1; y < customers.length; y++) {
-            minTill = getIndexOfMinTill(seller);
-            seller[minTill][y] = customers[y];
+        for (int i = numberOfTills; i < customers.length; i++) {
+            int minTill = getIndexOfMinTill(tills);
+            tills[minTill][i] = customers[i];
         }
-        return getMaxTillTime(seller);
+        return getMaxTillTime(tills);
+    }
+
+    public static int [][] createTills(int [] customers, int numberOfTills){
+        int[][] tills = new int[numberOfTills][customers.length];
+        for(int i = 0;i<numberOfTills;i++){
+            tills[i][i] = customers[i];
+        }
+        return tills;
     }
 
     public static int getIndexOfMinTill(int[][] tills) {
-        int x = 0;
-        int y = 0;
-        int summ = 0;
-        int minTill = 0;
-        int minSumm = 9999999;
+        int minTillIndex = 0;
+        int minSum = Arrays.stream(tills[0]).sum();
 
-        for (y = 0; y < tills.length; y++) {
-
-            for (x = 0; x < tills[0].length; x++) {
-                summ += tills[y][x];
+        for (int i = 1; i < tills.length; i++) {
+            int sum =  Arrays.stream(tills[i]).sum();
+            if (minSum > sum) {
+                minSum = sum;
+                minTillIndex = i;
             }
-            if (minSumm > summ) {
-                minSumm = summ;
-                minTill = y;
-            }
-            summ = 0;
         }
-        return minTill;
+        return minTillIndex;
     }
 
     public static int getMaxTillTime(int[][] tills) {
         int maxTillTime = 0;
 
-        for (int x = 0; x < tills.length; x++) {
-            if (Arrays.stream(tills[x]).sum() > maxTillTime) {
-                maxTillTime = Arrays.stream(tills[x]).sum();
+        for (int i = 0; i < tills.length; i++) {
+            int tillTime = Arrays.stream(tills[i]).sum();
+            if (tillTime > maxTillTime) {
+                maxTillTime = tillTime;
             }
         }
         return maxTillTime;
+    }
+
+    public static int getMaxTillTime(int tillNumbers, int[] customers){
+        int[] tills = new int [tillNumbers];
+        for(int i=0;i<tillNumbers;i++){
+            tills[i]=customers[i];
+        }
+        for (int i=tillNumbers;i<customers.length;i++){
+            int indexOfMinTill = getMinTill(tills);
+           tills[indexOfMinTill]+=customers[i];
+        }
+        return getMaxTill(tills);
+    }
+
+    public static int getMinTill(int[] tills){
+        int minTill=tills[0];
+        int indexOfMinTill=0;
+        for(int j=1;j<tills.length;j++){
+            if(tills[j]<minTill){
+                minTill=tills[j];
+                indexOfMinTill=j;
+            }
+        }
+        return indexOfMinTill;
+    }
+
+    public static int getMaxTill(int[] tills){
+        int maxTill=tills[0];
+        for(int j=1;j<tills.length;j++){
+            if(tills[j]>maxTill){
+                maxTill=tills[j];
+            }
+        }
+        return maxTill;
     }
 
 }
