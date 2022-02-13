@@ -38,7 +38,7 @@ public class TheSupermarketQueue {
 //        System.out.println(solveSuperMarketQueue(customers4, n));// should be 16.
         int[] customers5 = {2, 6, 3, 4, 2, 5, 2, 4, 2, 5, 7, 7};
         n = 5;
-        System.out.println(solveSuperMarketQueue(customers5, n));// should be 10.
+        System.out.println(solveSuperMarketQueue(customers5, n));// should be 13.
     }
 
     public static int solveSuperMarketQueue(int[] customers, int n) {
@@ -51,36 +51,33 @@ public class TheSupermarketQueue {
             return Arrays.stream(customers).sum();
         }
 
-        int x = 0;
-        int y = 0;
-        int minTill = 0;
-        int[][] seller = new int[n][customers.length];
-        seller[0][0] = customers[0];
+        int[][] tills = new int[n][customers.length];
 
-        for (y = 1; y < customers.length; y++) {
-            minTill = getIndexOfMinTill(seller);
-            seller[minTill][y] = customers[y];
+        for(int i=0;i<n;i++){
+            tills[i][0]=customers[i];
         }
-        return getMaxTillTime(seller);
+
+        for (int y = n; y < customers.length; y++) {
+            int minTill = getIndexOfMinTill(tills);
+            tills[minTill][y] = customers[y];
+        }
+        return getMaxTillTime(tills);
     }
 
     public static int getIndexOfMinTill(int[][] tills) {
-        int x = 0;
-        int y = 0;
-        int summ = 0;
         int minTill = 0;
-        int minSumm = 9999999;
+        int minSumm = tills[0][0];
 
-        for (y = 0; y < tills.length; y++) {
-
-            for (x = 0; x < tills[0].length; x++) {
+        for (int y = 0; y < tills.length; y++) {
+            int summ = 0;
+            for (int x = 0; x < tills[0].length; x++) {
                 summ += tills[y][x];
             }
             if (minSumm > summ) {
                 minSumm = summ;
                 minTill = y;
             }
-            summ = 0;
+
         }
         return minTill;
     }
