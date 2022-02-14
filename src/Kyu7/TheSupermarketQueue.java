@@ -38,8 +38,10 @@ public class TheSupermarketQueue {
 //        System.out.println(solveSuperMarketQueue(customers4, n));// should be 16.
         int[] customers5 = {2, 6, 3, 4, 2, 5, 2, 4, 2, 5, 7, 7};
         n = 5;
+
         System.out.println(solveSuperMarketQueue(customers5, n));// should be 10.
         System.out.println(getMaxTillTime(n, customers5));
+
     }
 
     public static int solveSuperMarketQueue(int[] customers, int numberOfTills) {
@@ -52,14 +54,17 @@ public class TheSupermarketQueue {
             return Arrays.stream(customers).sum();
         }
 
+
         int[][] tills = createTills(customers,numberOfTills);
 
         for (int i = numberOfTills; i < customers.length; i++) {
             int minTill = getIndexOfMinTill(tills);
             tills[minTill][i] = customers[i];
+
         }
         return getMaxTillTime(tills);
     }
+
 
     public static int [][] createTills(int [] customers, int numberOfTills){
         int[][] tills = new int[numberOfTills][customers.length];
@@ -79,6 +84,7 @@ public class TheSupermarketQueue {
                 minSum = sum;
                 minTillIndex = i;
             }
+
         }
         return minTillIndex;
     }
