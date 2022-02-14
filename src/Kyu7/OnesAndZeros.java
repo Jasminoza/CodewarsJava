@@ -20,7 +20,7 @@ public class OnesAndZeros {
         for (int x = 0; x < binary.size(); x++) {
             binAsStr += binary.get(x);
         }
-        System.out.println(Character.valueOf(binAsStr));
+        //System.out.println(Character.valueOf(binAsStr));
 
         return 1;
     }
