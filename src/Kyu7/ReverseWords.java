@@ -30,7 +30,7 @@ public class ReverseWords {
                 revStr = revStr + reversed[j];
             }
         }
-        return revStr.trim();
+        return revStr;
     }
 
     public static String revOneWord(String word) {
