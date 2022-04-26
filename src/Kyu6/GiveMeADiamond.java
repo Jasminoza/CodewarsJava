@@ -35,16 +35,23 @@ package Kyu6;
 
 public class GiveMeADiamond {
     public static void main(String[] args) {
-        int n = 3;
+        int n = 1;
         System.out.println(print(n));
-//        n = 5;
-//        System.out.println(print(n));
-//        n = -345;
-//        System.out.println(print(n));//null
-//        n = 6;
-//        System.out.println(print(n));//null
-//        n = 15;
-//        System.out.println(print(n));
+        System.out.println();
+        n = 3;
+        System.out.println(print(n));
+        System.out.println();
+        n = 5;
+        System.out.println(print(n));
+        System.out.println();
+        n = -345;
+        System.out.println(print(n));//null
+        System.out.println();
+        n = 6;
+        System.out.println(print(n));//null
+        System.out.println();
+        n = 15;
+        System.out.println(print(n));
     }
 
     public static String print(int n) {
@@ -53,21 +60,43 @@ public class GiveMeADiamond {
             return null;
         }
 
-        String stars = "";
-        String spaces = "";
-        String newLines = "\n";
-        String diamond = "";
-
-        for (int x = 0; x < n; x++) {
-            stars = stars + "*";
+        if (n == 1) {
+            return "*\n";
         }
 
-        diamond = newLines + stars + newLines;
+        String[] diamond = new String[n];
 
-        return diamond.substring(0, diamond.length() - 2);
+        int starsCount = 1;
+        int firstHalf = (n - 1) / 2 + 1;
+        int spacesCount = firstHalf - 1;
+        int secondHalf = n - firstHalf;
 
-        //           " *\n***\n *\n"
+        for (int i = 0; i <= firstHalf; i++) {
+            diamond[i] = makeSpaces(spacesCount) + makeStars(starsCount) + "\n";
+            starsCount += 2;
+            spacesCount--;
+        }
 
-        //return "  *\n ***\n*****\n ***\n  *\n";
+        starsCount -= 2;
+        spacesCount++;
+
+        int m = secondHalf;
+        for (int i = n; i >= secondHalf + 1; i--) {
+
+            starsCount -= 2;
+            spacesCount++;
+            diamond[m] = makeSpaces(spacesCount) + makeStars(starsCount) + "\n";
+            m++;
+        }
+
+        return String.join("", diamond);
+    }
+
+    public static String makeSpaces(int m) {
+        return " ".repeat(Math.max(0, m));
+    }
+
+    public static String makeStars(int l) {
+        return "*".repeat(Math.max(0, l));
     }
 }
