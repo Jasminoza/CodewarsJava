@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class OddOrEven {
     public static void main(String[] args) {
-        int a[] = {2, 5, 34, 6};
+        int[] a = {2, 5, 34, 6};
         System.out.println(oddOrEven(a));
     }
 
